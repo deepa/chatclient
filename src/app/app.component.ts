@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { WebSocketService } from './web-socket.service';
 
 @Component({
   selector: 'app-root',
@@ -7,25 +8,26 @@ import { Observable, Subject } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'chatclient';
+  messages: string[] = [];
+  username = '';
+  message = '';
+  isUserSet = false;
 
-  constructor() {
-    const observableOne = new Observable(observer => {
-      observer.next(Math.random());
+  constructor(public websocketService: WebSocketService) {
+    
+    websocketService.onMessage.subscribe((message) => {
+      this.messages.push(JSON.parse(message.data));
     });
+    
+  }
 
-    observableOne.subscribe(value => console.log('subscriber one A: ', value));
-    observableOne.subscribe(value => console.log('subscriber one B: ', value));
+  sendMessage() {
+    this.websocketService.send('{"username":"' + this.username + '","content":"' + this.message + '"}');
+    this.message = '';
+  }
 
-    const observableTwo = new Observable(observer => {
-      observer.next(Math.random());
-    });
-
-    const subject = new Subject();
-
-    subject.subscribe(value => console.log('subscriber two A: ', value));
-    subject.subscribe(value => console.log('subscriber two B: ', value));
-
-    observableTwo.subscribe(subject);
+  sendUsername() {
+    this.websocketService.send('{"username":"' + this.username + '","content":"JOIN"}');
+    this.isUserSet = true;
   }
 }
