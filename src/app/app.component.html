@@ -1,32 +1,26 @@
-<link href="node_modules/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
-
 <!--USERNAME CARD -->
 <div *ngIf="!isUserSet;else chatTemplate">
 
   <mat-card>
 
     <!--USERNAME CARD TITLE -->
-    <mat-card-title>Enter your username</mat-card-title>
+    <mat-card-title>Welcome to the chat room</mat-card-title>
 
     <!--USERNAME CARD CONTENT -->
     <mat-card-content>
-
-      <!--USERNAME INPUT -->
-      <mat-form-field class="example-full-width">
-        <input matInput [(ngModel)]="username">
+      <mat-form-field color="primary" floatLabel=true class="example-card">
+        <input matInput maxlength=10 size=15 placeholder="Chat handle" [(ngModel)]="username">
       </mat-form-field>
-
-      <!--USERNAME BUTTON -->
-      <button mat-button color="primary" (click)="sendUsername()">Send</button>
-
+      <button mat-raised-button color="primary" (click)="sendUsername()">Enter chatroom</button>
     </mat-card-content>
+
   </mat-card>
 
 </div>
 
 <!--CHAT CARD-->
 <ng-template #chatTemplate>
-  <mat-card class="chat-card">
+  <mat-card class="example-card">
 
     <!--CHAT CARD TITLE -->
     <mat-card-title>Chat</mat-card-title>
@@ -35,26 +29,33 @@
     <mat-card-content class="chat-content">
       <mat-list>
         <mat-list-item *ngFor="let message of messages">
-
-          <mat-icon mat-list-icon><i class="material-icons">sentiment_satisfied</i></mat-icon>
           <h4 mat-line>{{message.username}}</h4>
           <p mat-line> {{message.content}} </p>
-
+          <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
     </mat-card-content>
 
     <!--CHAT CARD FOOTER -->
-    <mat-card-footer>
+    <mat-card-footer class="send-message">
 
       <!--MESSAGE INPUT -->
-      <mat-form-field class="example-full-width">
-        <input matInput [(ngModel)]="message">
-      </mat-form-field>
+      <!-- <mat-form-field>
+        <textarea matInput maxlength=300 [(ngModel)]="message"></textarea>
+      </mat-form-field> -->
 
       <!--MESSAGE BUTTON -->
-      <button mat-button color="primary" (click)="sendMessage()">Send</button>
-
+      <form>
+      <mat-card-actions>
+        <mat-form-field color="primary" floatLabel=true class="example-card">
+          <textarea matInput cdkTextareaAutosize type="text"
+          cdkAutosizeMinRows="2" maxlength=300 placeholder="Message" [(ngModel)]="message"
+          [ngModelOptions]="{standalone: true}"></textarea>
+        
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>
+      </mat-card-actions>
+    </form>
     </mat-card-footer>
 
   </mat-card>

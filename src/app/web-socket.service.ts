@@ -1,6 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
-
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class WebSocketService {
@@ -15,7 +14,7 @@ export class WebSocketService {
 
     connect() {
         this.websocket = new WebSocket('ws://localhost:4200/chat');
-        this.websocket.onMessage = (message: MessageEvent) => {
+        this.websocket.onmessage = (message: MessageEvent) => {
             this.onMessage.next(message);
         };
     }
@@ -23,4 +22,5 @@ export class WebSocketService {
     send(message: string): void {
         this.websocket.send(message);
     }
+
 }

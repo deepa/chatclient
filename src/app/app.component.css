@@ -1,18 +1,20 @@
+
 .example-form {
   min-width: 150px;
   max-width: 500px;
-  width: 100%;
+  padding: 30px;
+  width: 80%;
+}
+ 
+.example-card {
+  min-width: 150px;
+  max-width: 500px;
+  padding: 30px;
+  width: 80%;
 }
 
-.example-full-width {
+.send-message {
+  margin: auto;
   width: 100%;
+  padding: 30px;
 }
-  
-  .chat-card{
-    width: 500px;
-  }
-  
-  .chat-content{
-    height: 300px;
-    overflow-y: auto;
-  }

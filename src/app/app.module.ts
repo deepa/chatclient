@@ -4,6 +4,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatIconModule } from '@angular/material';
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+
 
 import { AppComponent } from './app.component';
 import { WebSocketService } from './web-socket.service';
@@ -21,7 +23,8 @@ import { WebSocketService } from './web-socket.service';
     MatCardModule,
     MatButtonModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    ScrollDispatchModule
   ],
   providers: [WebSocketService],
   bootstrap: [AppComponent]
